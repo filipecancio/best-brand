@@ -10,17 +10,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+  List<String> productList = ["tenis","bone","camisa","oculos"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("home"),
+        title: const Text("home"),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[ProductItem()],
+        child: GridView.count(
+            crossAxisCount: 2,
+          children: productList.map((product) => ProductItem(name: product)).toList(),
         ),
       ),
       floatingActionButton: FloatingActionButton(

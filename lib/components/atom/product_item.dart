@@ -1,7 +1,10 @@
-
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class ProductItem extends StatefulWidget {
+  const ProductItem({super.key, required this.name});
+
+  final String name;
+
   @override
   State<StatefulWidget> createState() {
     return ProductItemState();
@@ -12,7 +15,7 @@ class ProductItem extends StatefulWidget {
 class ProductItemState extends State<ProductItem>{
   @override
   Widget build(BuildContext context) {
-    return const Text("produto");
+    return Text(widget.name);
   }
 
 }
