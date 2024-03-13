@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:best_brand/components/atom/product_item.dart';
 import 'package:best_brand/domain/bb_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   final BBRepository repository;
@@ -16,26 +14,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late dynamic _feedEstatico;
-  List<dynamic> _items = [];
   List<String> _names = [];
-  int _proximaPagina = 1;
 
-// Fetch content from the json file
-  Future<void> readJson() async {
-    final String response = await rootBundle.loadString('lib/assets/feed.json');
-    _feedEstatico = await json.decode(response);
+  Future<void> fetchData() async {
+    List<String> data = await widget.repository.readJson();
+
     setState(() {
-      _items = _feedEstatico["produtos"];
-      _items = _items.map((product) => product['product']).toList();
-      _names = _items.map((product) => product['name'].toString()).toList();
+      _names = data;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    readJson();
+    fetchData();
   }
 
   @override
