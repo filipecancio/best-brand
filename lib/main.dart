@@ -1,12 +1,17 @@
-import 'package:best_brand/components/screen/home_screen.dart';
+import 'package:best_brand/domain/bb_repository.dart';
+import 'package:best_brand/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final BBRepository repository = BBRepository();
+
+  MyApp({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: HomeScreen(repository: repository)
     );
   }
 }
