@@ -9,12 +9,7 @@ import 'package:flutter/services.dart';
 class HomeScreen extends StatefulWidget {
   final BBRepository repository;
 
-  const HomeScreen({
-    super.key,
-    required this.repository
-  });
-
-
+  const HomeScreen({super.key, required this.repository});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -23,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late dynamic _feedEstatico;
   List<dynamic> _items = [];
+  List<String> _names = [];
   int _proximaPagina = 1;
 
 // Fetch content from the json file
@@ -32,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _items = _feedEstatico["produtos"];
       _items = _items.map((product) => product['product']).toList();
+      _names = _items.map((product) => product['name'].toString()).toList();
     });
   }
 
@@ -43,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    log('vaalores $_items');
+    log('vaalores $_names');
 
     return Scaffold(
       appBar: AppBar(
@@ -51,16 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("home"),
       ),
       body: Center(
-        child: GridView.count(
-            crossAxisCount: 2,
-          children: _items.isEmpty ?
-          _items.map((product) => ProductItem(name: product['name'])).toList()
-              : [Container()]
-          //widget.repository.getAllProducts().map((product) => ProductItem(name: product)).toList(), //if(_items != null){_items.map((product) => ProductItem(name: product['name'])).toList()} else {[]}
-        ),
-      ),
+          child: _names.isEmpty
+              ? GridView.count(
+                  crossAxisCount: 2,
+                  children: _names
+                      .map((product) => ProductItem(name: product))
+                      .toList())
+              : Container()),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: () {},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
