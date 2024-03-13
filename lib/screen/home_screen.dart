@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:best_brand/components/atom/product_item.dart';
 import 'package:best_brand/domain/bb_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   final BBRepository repository;
@@ -19,24 +21,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<dynamic> _staticfeed;
+  late dynamic _feedEstatico;
+  List<dynamic> _items = [];
+  int _proximaPagina = 1;
 
-  void getData(){
+// Fetch content from the json file
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('lib/assets/feed.json');
+    _feedEstatico = await json.decode(response);
     setState(() {
-      _staticfeed = widget.repository.readJson();
+      _items = _feedEstatico["produtos"];
+      _items = _items.map((product) => product['product']).toList();
     });
   }
 
   @override
   void initState() {
-    getData();
     super.initState();
+    readJson();
   }
 
   @override
   Widget build(BuildContext context) {
-
-
+    log('vaalores $_items');
 
     return Scaffold(
       appBar: AppBar(
@@ -46,14 +53,17 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: GridView.count(
             crossAxisCount: 2,
-          children: widget.repository.getAllProducts().map((product) => ProductItem(name: product)).toList(),
+          children: _items.isEmpty ?
+          _items.map((product) => ProductItem(name: product['name'])).toList()
+              : [Container()]
+          //widget.repository.getAllProducts().map((product) => ProductItem(name: product)).toList(), //if(_items != null){_items.map((product) => ProductItem(name: product['name'])).toList()} else {[]}
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
