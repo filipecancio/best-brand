@@ -39,14 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("home"),
       ),
-      body: Center(
-          child: _names.isEmpty
-              ? GridView.count(
-                  crossAxisCount: 2,
-                  children: _names
-                      .map((product) => ProductItem(name: product))
-                      .toList())
-              : Container()),
+      body: ListView.builder(
+          shrinkWrap: true,
+          itemCount: _names.length,
+          itemBuilder: (context, index) {
+            return ProductItem(name: _names[index]);
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         tooltip: 'Increment',
