@@ -1,9 +1,10 @@
+import 'package:best_brand/domain/product.dart';
 import 'package:flutter/material.dart';
 
 class ProductItem extends StatefulWidget {
-  const ProductItem({super.key, required this.name});
+  const ProductItem({super.key, required this.product});
 
-  final String name;
+  final Product product;
 
   @override
   State<StatefulWidget> createState() {
@@ -15,7 +16,7 @@ class ProductItem extends StatefulWidget {
 class ProductItemState extends State<ProductItem>{
   @override
   Widget build(BuildContext context) {
-    return Text(widget.name);
+    return Text(widget.product.product.name);
   }
 
 }

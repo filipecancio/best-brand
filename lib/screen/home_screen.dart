@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           shrinkWrap: true,
           itemCount: _productList.length,
           itemBuilder: (context, index) {
-            return ProductItem(name: _productList[index].product.name);
+            return ProductItem(product: _productList[index]);
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
