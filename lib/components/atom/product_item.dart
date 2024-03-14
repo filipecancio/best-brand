@@ -13,10 +13,20 @@ class ProductItem extends StatefulWidget {
 
 }
 
-class ProductItemState extends State<ProductItem>{
+class ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
-    return Text(widget.product.product.name);
+    return Card(
+      child: ListTile(
+        leading: const FlutterLogo(size: 72.0),
+        title: Text(widget.product.product.name),
+        subtitle:
+        Text(widget.product.company.name),
+        trailing: const Icon(Icons.more_vert),
+        isThreeLine: true,
+      ),
+    );
+    //Text(widget.product.product.name);
   }
 
 }
