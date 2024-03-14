@@ -16,13 +16,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Brand> _productList = [];
+  List<Brand> _brandList = [];
 
   Future<void> fetchData() async {
-    List<Brand> data = await widget.repository.readFeedJson();
+    List<Brand> allBrands = await widget.repository.getAllBrands();
 
     setState(() {
-      _productList = data;
+      _brandList = allBrands;
     });
   }
 
@@ -41,9 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView.builder(
           shrinkWrap: true,
-          itemCount: _productList.length,
+          itemCount: _brandList.length,
           itemBuilder: (context, index) {
-            return ProductItem(product: _productList[index]);
+            return ProductItem(product: _brandList[index]);
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},

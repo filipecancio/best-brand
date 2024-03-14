@@ -1,17 +1,3 @@
-class ProductData {
-  final List<Brand> products;
-
-  ProductData({required this.products});
-
-  factory ProductData.fromJson(List<dynamic> json) {
-    List<Brand> productList = json.map((i) => Brand.fromJson(i)).toList();
-
-    return ProductData(
-      products: productList,
-    );
-  }
-}
-
 class Brand {
   final int id;
   final String datetime;
