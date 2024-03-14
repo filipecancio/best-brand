@@ -16,10 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Product> _productList = [];
+  List<Brand> _productList = [];
 
   Future<void> fetchData() async {
-    List<Product> data = await widget.repository.readFeedJson();
+    List<Brand> data = await widget.repository.readFeedJson();
 
     setState(() {
       _productList = data;

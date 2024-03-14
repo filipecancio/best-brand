@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ProductItem extends StatefulWidget {
   const ProductItem({super.key, required this.product});
 
-  final Product product;
+  final Brand product;
 
   @override
   State<StatefulWidget> createState() {
