@@ -1,6 +1,8 @@
 import 'package:best_brand/domain/product.dart';
 import 'package:flutter/material.dart';
 
+import '../../navigation/bb_navigation.dart';
+
 class ProductItem extends StatefulWidget {
   const ProductItem({super.key, required this.product});
 
@@ -16,7 +18,9 @@ class ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {},
+        onTap: () {
+          navigation.navigateTo(BBNavigationType.detail);
+        },
         child: Card(
           child: ListTile(
             leading: Image.asset("lib/images/avatar.png"),

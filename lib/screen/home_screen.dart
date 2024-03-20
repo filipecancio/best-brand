@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:best_brand/components/atom/product_item.dart';
 import 'package:best_brand/domain/bb_repository.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,

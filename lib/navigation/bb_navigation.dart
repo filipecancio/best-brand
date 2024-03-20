@@ -16,3 +16,5 @@ class BBNavigation extends ChangeNotifier {
   }
 
 }
+
+late BBNavigation navigation;
